@@ -3,7 +3,6 @@ title: "About ykdu's blog"
 author: "ykdu"
 tags: ["origin"]
 date: 2019-03-26T13:49:41+08:00
-draft: true
 ---
 
 我为什么开始使用Blog?
