@@ -18,7 +18,7 @@ theme = "hugo-nuo"
 [params]
   author = "Yukun Du"
   # bg = "images/grey-prism.svg"
-  # avatar = "images/avatar.png"
+  avatar = "images/stark.png"
   seotitle = "ykdu's blog"
   subtitle = "~ Keep Going ~"
   description = ""
