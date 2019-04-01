@@ -12,10 +12,12 @@ draft: true
 <!--more-->
 
 
+国外的一位游戏开发者在[Twitch](https://www.twitch.tv/handmade_hero)上面直播从零开始写一个游戏。
+
 
 ## Day 001 settting up with Windows build
 
-* visual studio = debuger
+* visual studio = debuger, shortcut from cmd devenv
 * subst:
     * 将一个文件夹目录 
     * Associates a path with a drive letter. If used without parameters, subst displays the names of the virtual drives in effect.
