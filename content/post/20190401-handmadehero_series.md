@@ -4,7 +4,7 @@ author: "ykdu"
 tags: ["handmadehero"]
 weight: 0
 date: 2019-04-01T18:39:47+08:00
-draft: true
+<!--draft: true-->
 ---
 
 [Handmade Hero Project](https://handmadehero.org/watch), Handmade Game from the very beginning
