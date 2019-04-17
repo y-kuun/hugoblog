@@ -15,7 +15,10 @@ date: 2019-04-01T18:39:47+08:00
 国外的一位游戏开发者在[Twitch](https://www.twitch.tv/handmade_hero)上面直播从零开始写一个游戏。
 
 
-## Day 001 settting up with Windows build
+## Day 001 settting up with Windows build & QA
+
+
+* 微软的VC++工具 + visual studio debugger 是视频中两个主要使用的工具
 
 * visual studio = debuger, shortcut from cmd devenv
 * subst:
@@ -36,3 +39,23 @@ win32_handmade.exe!__scrt_common_main_seh() 行 288	C++
 kernel32.dll!BaseThreadInitThunk()	未知
 ntdll.dll!00007ff8f6b53691()	未知
 ```
+
++ Q: Why start from scratch ? 有人问Miblo为为什么要从这么基础的地方开始而不选择去使用引擎
+    * 对于一个严谨的游戏开发者而言需要学会游戏制作当中大大小小的所有事情是很重要的。
+    * 如果从引擎开始，那么对很多基础知识的认识可能会出现偏差，引擎会产生一个功能强大的中间层，
+    并且将真正的游戏代码逻辑功能与开发者隔离开。开发者学会的是使用引擎，而不是制作游戏。
+    * Knowing all stuffs underneath will make you stronger even in an Engine.
+    * Miblo的观点：如果没有人去学习如何制作轮子（引擎）而只是去使用轮子（引擎），那么以后谁来制作新的轮子（引擎）。
+
+## Day 002 win32 windows
+
+* win32 API is written in C, which can not overload functions?
+  - why MSDN show
+
+* win32 surfix:
+  - FuncEX: 兼容使用，用于处理
+  - FuncA: using ANSI char
+  - FuncW: using wide char, unicode
+  
+* win32 game client:
+  - create & register windows
