@@ -4,7 +4,7 @@ author: "ykdu"
 tags: ["handmadehero"]
 weight: 0
 date: 2019-04-01T18:39:47+08:00
-<!--draft: true-->
+draft: true-->
 ---
 
 [Handmade Hero Project](https://handmadehero.org/watch), Handmade Game from the very beginning
@@ -59,3 +59,10 @@ ntdll.dll!00007ff8f6b53691()	未知
   
 * win32 game client:
   - create & register windows
+  - loop
+
+## Day 003 Allocating a Backbuffer
+
+* Resource acquisition is initialization (RAII)
+  - Handle Resource all together aggregately instead of indivival
+  - start to think construction desctruction acquisition and free in waves?
