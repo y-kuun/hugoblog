@@ -4,7 +4,7 @@ author: "ykdu"
 tags: ["handmadehero"]
 weight: 0
 date: 2019-04-01T18:39:47+08:00
-draft: true-->
+<!-- draft: true -->
 ---
 
 [Handmade Hero Project](https://handmadehero.org/watch), Handmade Game from the very beginning
@@ -17,6 +17,12 @@ draft: true-->
 
 ## Day 001 settting up with Windows build & QA
 
+* 内容总结：
+	1. 搭建Windows平台的开发环境，使用VS的command line tools
+	2. 构建的脚本自己编写，这样可以学习被VS等IDE屏蔽的细节
+	3. MSDN函数的reference查询（调用方式，包含头文件，包含库文件），撰写一个WinMain，以及HelloWorld Messagebox。
+	
+***
 
 * 微软的VC++工具 + visual studio debugger 是视频中两个主要使用的工具
 
@@ -49,6 +55,14 @@ ntdll.dll!00007ff8f6b53691()	未知
 
 ## Day 002 win32 windows
 
+* 内容总结
+	1. 在第一课只有一个对话框的基础上，创建的窗口，相关的属性
+	2. 为相关的客户端窗口注册相关的消息回调函数
+	3. 注意Windows希望自己掌控Message的dispatch
+	4. 相应WM_PAINT消息，利用BeginPaint以及EndPaint，对窗口背景进行绘制（纯色）
+	
+---
+
 * win32 API is written in C, which can not overload functions?
   - why MSDN show
 
@@ -63,6 +77,14 @@ ntdll.dll!00007ff8f6b53691()	未知
 
 ## Day 003 Allocating a Backbuffer
 
+* 内容总结
+	1. 基于Day002，处理剩余部分需要处理的`Windows Message`
+	2. 希望可以使用自己绘制的buff对客户端的窗口进行填充，而不是只填充白色或者黑色
+	3. 今天Casey貌似有点卡壳了，1个小时时间讲完了，只将创建buff的函数讲清楚了
+
+---
 * Resource acquisition is initialization (RAII)
   - Handle Resource all together aggregately instead of indivival
   - start to think construction desctruction acquisition and free in waves?
+  
+* 之前的可能可以设置客户端的背景颜色，不是白色就是黑色，第三天的相关工作
