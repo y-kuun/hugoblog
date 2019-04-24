@@ -88,3 +88,13 @@ ntdll.dll!00007ff8f6b53691()	未知
   - start to think construction desctruction acquisition and free in waves?
   
 * 之前的可能可以设置客户端的背景颜色，不是白色就是黑色，第三天的相关工作
+
+* Device Context & Memory Device Context
+  * Device Context, 是windows用来屏蔽不同种设备绘制复杂度而提供的接口，
+  可以让程序以一套的接口再不同设备是进行绘图
+
+* QA:
+	* 是否能够自己生成Buff再传递给Windows
+		* 也许可以但是不是一个好方法
+	* sleep will prevent melting the CPU
+	* pre ANSI C didn't allow return structs, funny

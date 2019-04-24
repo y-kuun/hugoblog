@@ -1,5 +1,5 @@
 ---
-title: "Google Sanitizers (draft)"
+title: "Google Sanitizers"
 author: "ykdu"
 tags: ["memcheck", "intro", "tool"]
 weight: 10
@@ -26,22 +26,26 @@ ASan不仅支持Linux-like以及Unix-like操作系统，还支持多种不同的
 
 - Average slowdown ~2x
 - 工具由LLVM插桩模块以及一个动态的运行库组成（替换了malloc）
-- [Algorithm Design](https://github.com/google/sanitizers/wiki/AddressSanitizerAlgorithm)
+<!-- - [Algorithm Design](https://github.com/google/sanitizers/wiki/AddressSanitizerAlgorithm) -->
 <!-- - [Comparison with Others](https://github.com/google/sanitizers/wiki/AddressSanitizerComparisonOfMemoryTools) -->
 
 ## How to USE
 
-Simply compile and link your program with -faddress-sanitizer flag. 
-To get a reasonable performance add -O1 or higher. 
-To get nicer stack traces in error messages add -fno-omit-frame-pointer. 
-To get perfect stack traces you may need to disable inlining (just use -O1) and [tail call elimination](https://www.geeksforgeeks.org/tail-call-elimination/) (-fno-optimize-sibling-calls).
+由于相关的功能以及融合到clang+llvm当中，相关的开启和关闭也十分的便捷。
+<!-- Simply compile and link your program with -faddress-sanitizer flag.  -->
+<!-- To get a reasonable performance add -O1 or higher.  -->
+<!-- To get nicer stack traces in error messages add -fno-omit-frame-pointer.  -->
+<!-- To get perfect stack traces you may need to disable inlining (just use -O1) and [tail call elimination](https://www.geeksforgeeks.org/tail-call-elimination/) (-fno-optimize-sibling-calls). -->
+
+### Turning on 
 
 需要在编译和连接的时候传入-faddress-sanitizer参数，
 能够通过添加-O1或者更高的优化层级来提升性能
 能够通过添加-fno-omit-frame-pointer参数想错误信息中添加更加友好的栈跟踪信息
 能够通过禁止内联函数（-O1）以及尾调用消除可以获得完整的栈追踪信息
 
-## Turning off instrumentation
+### Turning off
+
 ```
 #if defined(__clang__) || defined (__GNUC__)
 # define ATTRIBUTE_NO_SANITIZE_ADDRESS __attribute__((no_sanitize_address))
