@@ -98,3 +98,11 @@ ntdll.dll!00007ff8f6b53691()	未知
 		* 也许可以但是不是一个好方法
 	* sleep will prevent melting the CPU
 	* pre ANSI C didn't allow return structs, funny
+
+
+## Day 004 
+	* Correction about StretchDIBits() BitBlt()
+		* BitBlt
+			* relatived faster, 依赖win32 build-in的device context，速度会比较快速（内部优化）
+		* StrechDIBits:
+			* slower，不依赖win32相关内容，依赖一个void*的buffer，可以使用openGL等方式生成
