@@ -106,3 +106,9 @@ ntdll.dll!00007ff8f6b53691()	未知
 			* relatived faster, 依赖win32 build-in的device context，速度会比较快速（内部优化）
 		* StrechDIBits:
 			* slower，不依赖win32相关内容，依赖一个void*的buffer，可以使用openGL等方式生成
+	* VirtualAlloc VirtualFree VirtualProtect
+		* Virtual Alloc VirtualFree 很好理解
+		* VirtualProtect可以通过将内存设置为不能读写，来检测 user after free bug
+	* 我真的佩服这个老哥，老是refactor变量的名字
+	* 他的WM_SIZE之后的确只是重新绘制新增的部分，而我这边会绘制整个屏幕
+	* 处理字节计算的时候需要注意运算溢出的问题
