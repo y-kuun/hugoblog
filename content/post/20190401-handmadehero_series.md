@@ -109,6 +109,15 @@ ntdll.dll!00007ff8f6b53691()	未知
 	* VirtualAlloc VirtualFree VirtualProtect
 		* Virtual Alloc VirtualFree 很好理解
 		* VirtualProtect可以通过将内存设置为不能读写，来检测 user after free bug
+		* HeapAlloc
 	* 我真的佩服这个老哥，老是refactor变量的名字
 	* 他的WM_SIZE之后的确只是重新绘制新增的部分，而我这边会绘制整个屏幕
 	* 处理字节计算的时候需要注意运算溢出的问题
+
+### QA
+	* using 0 instead of NULL
+		* less definition is better
+	* malloc and new and HeapAlloc
+		* ??
+	* streaming for two years 
+	* for writecopy and COW
