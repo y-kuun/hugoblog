@@ -104,14 +104,33 @@ ntdll.dll!00007ff8f6b53691()	未知
 	* Correction about StretchDIBits() BitBlt()
 		* BitBlt
 			* relatived faster, 依赖win32 build-in的device context，速度会比较快速（内部优化）
+			* 但是只能DC->DC，所以这个老哥开始想要使用一个memory dc来保存相关的buffer，但是最后没有讲完
 		* StrechDIBits:
-			* slower，不依赖win32相关内容，依赖一个void*的buffer，可以使用openGL等方式生成
+			* slower，不依赖win32相关内容，依赖一个`void`的buffer，可以使用openGL等方式生成
+			* 貌似具有较高的自由度
+			
+			
 	* VirtualAlloc VirtualFree VirtualProtect
 		* Virtual Alloc VirtualFree 很好理解
 		* VirtualProtect可以通过将内存设置为不能读写，来检测 user after free bug
+		* 区分
+			* VirtualAlloc, low-level
+			* HeapAlloc
+		
 	* 我真的佩服这个老哥，老是refactor变量的名字
+	
 	* 他的WM_SIZE之后的确只是重新绘制新增的部分，而我这边会绘制整个屏幕
+	
 	* 处理字节计算的时候需要注意运算溢出的问题
+	
+### QA
+	* using 0 instead of NULL
+		* less definition is better
+	* malloc and new and HeapAlloc
+		* ??
+	* streaming for two years 
+	* for writecopy and COW
+	* alpha
 
 ## Day 005
 	* Overview all the week
