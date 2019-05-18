@@ -112,3 +112,22 @@ ntdll.dll!00007ff8f6b53691()	未知
 	* 我真的佩服这个老哥，老是refactor变量的名字
 	* 他的WM_SIZE之后的确只是重新绘制新增的部分，而我这边会绘制整个屏幕
 	* 处理字节计算的时候需要注意运算溢出的问题
+
+## Day 005
+	* Overview all the week
+	* pass pointer or pass value, if pass a large structvj
+	* 处理指针时候需要注意当两个指针指向同一片地址
+	* 实际上栈上的变量实际上都是一样的，只是作用域有所不同，对于C++而言还有一个构造析构函数的调用
+	* access violation
+		- 默认的程序的虚拟地址空间没有映射到任何的物理页面上面，除非调用了malloc/VirtualAlloc等
+		- 当程序通过指针访问一个无效的页面时，cpu将会设置相关的异常标志位给操作系统，之后操作系统将会抛出异常，segmentation fault
+		
+## Day 006
+
+## Day 007
+
+## Day 008
+
+## Day 009
+
+## Day 010
