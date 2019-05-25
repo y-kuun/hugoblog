@@ -118,9 +118,7 @@ ntdll.dll!00007ff8f6b53691()	未知
 			* HeapAlloc
 		
 	* 我真的佩服这个老哥，老是refactor变量的名字
-	
 	* 他的WM_SIZE之后的确只是重新绘制新增的部分，而我这边会绘制整个屏幕
-	
 	* 处理字节计算的时候需要注意运算溢出的问题
 	
 ### QA
@@ -140,13 +138,80 @@ ntdll.dll!00007ff8f6b53691()	未知
 	* access violation
 		- 默认的程序的虚拟地址空间没有映射到任何的物理页面上面，除非调用了malloc/VirtualAlloc等
 		- 当程序通过指针访问一个无效的页面时，cpu将会设置相关的异常标志位给操作系统，之后操作系统将会抛出异常，segmentation fault
+	* alloc a big size of array on stack => stack overflow (x86 visual studio 1MB, compile with given stack size
+	* 指针的地址实际上需要配置地址空间才有效
+	* 这个哥们目前讲解的内容有些十分的基础，包括一下C语言的基础语法规则
+	* pointer aliasing
 		
 ## Day 006
+	* input from a game paddle
+	* DirectInput and XInput
+	* 实际上一个设备可以plug多个不同的设备（手柄），在game loop中需要循环每一个设备，并且接受相关的按键消息才可以
+	* 在连接相关的静态库的时候需要注意相关静态库的环境需求，如果最后编译的可执行文件运行的环境不支持链接的静态库的load条件，
+	那么整个可执行程序都不会load，所以有时候关注兼容性的时候需要注意
+	* 写完代码之后，可以通过review代码检查自己的代码风格是否符合自己的期望
+	* 不要在编码的阶段考虑过多的low-level optimisation，只要不写太多的灾难性的代码一切都是可以接受的
 
 ## Day 007
-
+	* alt-f4 will provoke `WM_CLOSE` message before `WM_KEYDOWN` message
+	* be careful with bool and integer when commes to compiler optimasation
+	* DirectSound maintain a buffer to contain the audio data, which is palyed loop buffer-wide.
+	when comes the newcomming data, the start location should be ahead the playing position.
+	* `HRESULT`, `winerror.h`, checking with SUCCEESS
+	* 载入dll库，创建DirectSound对象，设置cooperative level，创建primary/secondary buff then play it
+	
 ## Day 008
+	* TO CHECH
+		- what is primary buffer and secondary buffer??
+		- what is waveformt variable member means??
+		- SoundBuffer: square wave
+			- ToneHz, how many full circles in one second
+			- ToneVolume, the value in the sound buffer, 
+			- SamplesPerSecond, 采样率，数据信号和模拟信号之间的转化，每一秒的波形由这么多个离散的数字信号构成
+			- BytePerSample，一个sample需要包括所有的channel，每一个channel的volume大小使用一个uint16描述
+			- what is channel
 
-## Day 009
+## Day 009 
+	Variable-Pitch Sine Wave Output
+	* Review DirectSound init and square wave
+	* Story Time: Indi Game Jam, I have no idea what is that, 调试Sound Code 相关的时候需要一个音调比较精确的耳机
+   	* 一个重复填充的问题，由于声卡或者相关设计包括DirectSound库如何计算以及更新GetCurrentPosition方法我们不得而知，因此是可以去假设这个position的更新存在一个延迟（在老的平台上面的确也是这样的）。
+	* square wave is hard for ear
+	* math library will also not be used, handmade hero will implement one itself
+	* int fix_point float_point 24:55-42:25
+	* gap problem, bug found
+		- PlayCursor is always the same as ByteToLock, PlayCursor did not advanced, because play are called every frame
+		- not using SUCCEEDED
+		- upgrade the warning level
+		- Sound Skip
+	- lower Lantency
+		+ if your write to much to the buffer, next time you write some new data, which must be played when the previous data is played
+		
+### TOPICS
+	* basic conceptions
+	* 调整了day008的代码
+	* 控制了写入的buffer的大小， 由于这个实际上是个ring buffer，因此减少一次写入的内容可以解决延迟问题
+	* audio skip的优化问题
+	* fix point 以及 float point，IEEE754
+	* Thanksgiving holiday
 
-## Day 010
+## Day 010 Query Performance Counter and RDTSC
+	* The Interl Achitecture Reference Manual
+	* RDTSC， READ Time-Stamp Counter, processor's time-stamp counter for a CPU clock to EDX:EAX
+		- Counter for CPU instruction clock
+			- #define TIME_CONSUME ((double)(end - beg) / CLOCKS_PER_SEC), end = clock(), this might be Wall time
+		* Wall clock time - time as it passes in the real world. Measured in seconds.
+		* Processor time - how many cycles? this is related to wall clock time by processor frequency, but for a long time now frequency varies a lot and quickly.
+		
+### TOPIC
+	* RDTSC: Read Time-Stamp Counter, processor's time-stamp counter for CPU instruction clock to EDX:EAX
+		- 有些系统会记录CPU的clock计数，这样记录的时间差是所有在这个cpu上面执行过的操作的clock circle
+		- 有些会根据进程进行划分，只记录某一特定进程的时钟数
+		- processor clock
+		* 3.2 Billion of those per second, this might variable due to the performance of cpu might change, 电源管理
+		* Discontinous Values, 多核的计数器的值没有即使同步
+		* 目前有一些主板提供了专门的timing device精度上面会优于 RDTSC
+	* QueryPerformanceCounter, wall-clock
+		- MSDN recommended
+			- use `QueryPerformanceCounter` and `QueryPerformanceFrequency`, 他们都是API调用时候的性能会比RDSTC要慢
+			-
